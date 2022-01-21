@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Component from './hooks/1/Component'
+import Component from './hooks/1/LocalStorageComponent'
 
 function App() {
   return (
