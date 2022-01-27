@@ -1,18 +1,17 @@
 
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
-
-export const useLocalStorage = (eventHandler: (event: StorageEvent) => void): boolean => {
-    const [isChangeDetected, setIsChangeDetected] = useState<boolean>(false);
-    
+export const useLocalStorage = (key: string, onChange: (value: string) => void) =>
     useEffect(()=>{
-        window.addEventListener('storage', eventHandler);
+        const handleStorageChangeEvent = (event: StorageEvent) => {
+            console.log(`> handleStorageChange:newValue ${event.newValue}`);
+            if(event.key === key){
+                onChange(event.newValue || "");    
+            }
+        }
+
+        window.addEventListener('storage', handleStorageChangeEvent);
         return () => {
-            window.removeEventListener('storage', eventHandler);
+            window.removeEventListener('storage', handleStorageChangeEvent);
         };
-    }, []);
-
-    return isChangeDetected;
-    
-}
-
+    }, [key, onChange]);
