@@ -1,12 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCountry } from "./useCountry"
 import { randomCountry } from '../../data/countries'
+import {  Link } from "react-router-dom";
 
 
-const TestComponent = () => {
+const CountryComponent = () => {
     const { countryState, changeCountry } = useCountry()
 
     console.log('countryState', countryState);
+
+    useEffect(()=>{
+      // alert('hola');
+      // console.log('HOLA');
+      return () => {
+        // console.log('ADIOS');
+      }
+    }, []);
     
     return (
         <div style={{ backgroundColor: "cyan", padding: "40px" }}>
@@ -28,4 +37,4 @@ const TestComponent = () => {
       );
 }
 
-export default TestComponent;
+export default CountryComponent;

@@ -1,13 +1,13 @@
 
 import { useEffect } from 'react'
 
-import { createManagedState} from './ManagingProvidersO'
+import { createManagedState} from './ManagingProviders'
 
 export const {useCountry} = (() => {
     const [useManagedState] = createManagedState();
     
     const useCountry = () => {
-       const [state, setState] = useManagedState({data: 'UK'});         // it might be here
+       const [state, setState] = useManagedState('IK');         // it might be here
 
         // Initialise if necessary
         useEffect(() => {
@@ -18,7 +18,7 @@ export const {useCountry} = (() => {
             countryState: state,
             changeCountry: state === undefined
             ? () => { console.warn(`[countries-provider.useCountry] Cannot change country as state has not yet been initialised.`); }
-            : (newCountryCode: string) => setState({data: newCountryCode}),
+            : (newCountryCode: string) => setState((newCountryCode)),
         }
         console.log(`[countries-provider.useCountry] Returning: `, returns);
         return returns;
